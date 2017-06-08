@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{3fa06d82-6094-4f13-8c6f-a235d3605e06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Components">
+      <UniqueIdentifier>{c96e5492-705a-4dd9-8359-a94054bdd22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{d79b80fc-b7ae-46b4-ba26-524e6e9ff3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader &amp; Materials">
+      <UniqueIdentifier>{43b6ecb2-88a7-4f50-b08b-2a7b42d6701f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model &amp; Mesh">
+      <UniqueIdentifier>{31acfb42-6fc8-4603-bea0-6d7e1f39041c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{a7c81ab8-70bf-4a5e-b8a0-84d0cd349737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools\ImGUI">
+      <UniqueIdentifier>{aa2e4e1a-db70-4fb1-9a7b-c6b6c29a9267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{37bf36bd-c48c-4c64-b4ed-bf3c23690b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor">
+      <UniqueIdentifier>{a0725bc4-c8ed-441c-b126-6f2376dc3c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Effects">
+      <UniqueIdentifier>{7596f9d0-08da-4db1-80af-9f42978bce46}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetCatalogue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererComponent.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LightComponent.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSystem.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\ImGUI\imgui.cpp">
+      <Filter>Source Files\Tools\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\ImGUI\imgui_demo.cpp">
+      <Filter>Source Files\Tools\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\ImGUI\imgui_draw.cpp">
+      <Filter>Source Files\Tools\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\ImGUI\imgui_glfw.cpp">
+      <Filter>Source Files\Tools\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\ImGUI\imgui_impl_glfw_gl3.cpp">
+      <Filter>Source Files\Tools\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionScript.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionSystem.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoading.cpp">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoading.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Cubemap.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoading.cpp">
+      <Filter>Source Files\Shader &amp; Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Shader &amp; Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Shader &amp; Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CatalogueUtils.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxRenderer.cpp">
+      <Filter>Source Files\Engine\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="BloomEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererComponent.h">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LightComponent.h">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionScript.h">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RotateScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoading.h">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.hpp">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.hpp">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.hpp">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLoading.h">
+      <Filter>Source Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.hpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubemap.hpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoading.h">
+      <Filter>Source Files\Shader &amp; Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Source Files\Shader &amp; Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Source Files\Shader &amp; Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Source Files\Model &amp; Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CatalogueUtils.h">
+      <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetCatalogue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Source Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>Source Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="BloomEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Assets\Shaders\CubeMapFragShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\CubeMapVertShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\GreyFilterFragShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\ScreenFragShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\ScreenVertShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\SepiaFilterFragShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\SimpleVertShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\SingleColorFragShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\StandardFragShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\StandardVertShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\HDR_frag.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\blur_frag.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\bloom_frag.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
