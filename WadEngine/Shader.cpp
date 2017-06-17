@@ -50,6 +50,15 @@ void Shader::uniform(const char * name, const glm::vec3 & value) const
 	//	std::cerr << "Could not set [vec3] uniform attribute : " << name << std::endl;
 }
 
+void Shader::uniform(const char * name, const glm::vec2 & value) const
+{
+	GLint location = glGetUniformLocation(_programID, name);
+	if (location != -1)
+		glUniform2f(location, value.x, value.y);
+	//else
+	//	std::cerr << "Could not set [vec3] uniform attribute : " << name << std::endl;
+}
+
 void Shader::uniform(const char * name, const unsigned int & value) const
 {
 	GLint location = glGetUniformLocation(_programID, name);

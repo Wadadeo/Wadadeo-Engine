@@ -227,6 +227,15 @@ void InspectorWindow::drawMaterial(Material * material)
 	float shininess = material->getShininess();
 	if (ImGui::InputFloat("Shininess", &shininess))
 		material->setShinisess(shininess);
+
+	//Glow Map
+	glowProp(material);
+
+	//Tiling
+	vec2 tiling;
+	tiling = material->getTiling();
+	if (ImGui::InputFloat2("Tiling (x, y)", glm::value_ptr(tiling)))
+		material->setTiling(tiling);
 }
 
 void InspectorWindow::diffuseProp(Material * material)
@@ -284,6 +293,33 @@ void InspectorWindow::normalProp(Material * material)
 		ImGui::Text("<None>");
 	else
 		showTexturePreview(diffuseTextureID);
+	ImGui::PopStyleVar();
+}
+
+void InspectorWindow::glowProp(Material * material)
+{
+	GLuint glowTextureID = material->glowMap();
+
+
+	if (ImGui::Button("Glow Texture"))
+		ImGui::OpenPopup("glowMap");
+	ImGui::SameLine();
+
+	if (ImGui::BeginPopup("glowMap"))
+	{
+		if (ImGui::Selectable("<None>"))
+			material->setGlowMap((GLuint)0);
+		for (auto elt : assets->textures())
+			if (ImGui::Selectable(elt->name.c_str()))
+				material->setGlowMap(elt->id);
+		ImGui::EndPopup();
+	}
+
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, BETWEEN_PROPERTIES_SPACING));
+	if (glowTextureID == 0)
+		ImGui::Text("<None>");
+	else
+		showTexturePreview(glowTextureID);
 	ImGui::PopStyleVar();
 }
 

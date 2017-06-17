@@ -22,6 +22,9 @@ bool Editor::init(GLFWwindow* window, bool *shouldExit, AssetCatalogue *assetCat
 	// Setup ImGui binding
 	ImGui_ImplGlfwGL3_Init(window, false);
 
+
+	_assetCatalogue = assetCatalogue;
+
 	// Load Fonts
 	// (see extra_fonts/README.txt for more details)
 	//ImGuiIO& io = ImGui::GetIO();
@@ -119,6 +122,14 @@ void Editor::displayMainMenu(Scene *scene)
 				GameObject *selected = scene->addLight(SPOT_LIGHT, "Spot Light");
 				_inspector.display(SHOW_GAMEOBJECT, selected);
 			}
+
+			ImGui::Separator();
+			if (ImGui::MenuItem("Material")) 
+			{
+				static int matNumber = 0;
+				Material* test = _assetCatalogue->addMaterial(string("Material") + to_string(++matNumber));
+			}
+
 			ImGui::EndMenu();
 		}
 

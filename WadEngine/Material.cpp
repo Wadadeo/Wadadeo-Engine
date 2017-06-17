@@ -10,12 +10,14 @@ Material::Material(const std::string & name, Shader *shader) :
 	_diffuse = vec3(0.8, 0.8, 0.8);
 	_specular = _diffuse;
 	_shininess = 16.0f;
+	_tiling = vec2(1, 1);
 
 	for (int i = 0; i < MAX_DIFFUSE_TEX; i++)
 		diffuseTextures.push_back(AssetCatalogue::whiteTexture);
 	for (int i = 0; i < MAX_SPECULAR_TEX; i++)
 		specularTextures.push_back(AssetCatalogue::whiteTexture);
 	_normalMap = AssetCatalogue::whiteTexture;
+	_glowMap = 0;
 }
 
 Material::~Material() {}
@@ -49,12 +51,20 @@ void Material::sendInfoToShader()
 
 	if (_normalMap != AssetCatalogue::whiteTexture && _normalMap != 0) {
 		glActiveTexture(GL_TEXTURE0 + i);
-		_shader->uniform(ATTRIB_NORMAL, i);
+		_shader->uniform(ATTRIB_NORMAL, i++);
 		glBindTexture(GL_TEXTURE_2D, _normalMap);
 		_shader->uniform(ATTRIB_HAS_NORMAL, true);
 	}
 	else
 		_shader->uniform(ATTRIB_HAS_NORMAL, false);
+
+
+	glActiveTexture(GL_TEXTURE0 + i);
+	_shader->uniform(ATTRIB_GLOW, i++);
+	glBindTexture(GL_TEXTURE_2D, _glowMap);
+
+	_shader->uniform("material.tiling", _tiling);
+
 }
 
 //setters
@@ -64,6 +74,7 @@ void Material::setAmbiant(const vec3 & color) { _ambiant = color; }
 void Material::setDiffuse(const vec3 & color) { _diffuse = color; }
 void Material::setSpecular(const vec3 & color) { _specular = color; }
 void Material::setShinisess(const float & value) { _shininess = value; }
+void Material::setTiling(const vec2 & tiling) { _tiling = tiling; }
 
 void Material::setDiffuseTextures(const vector<Texture*>& diffuseMap)
 {
@@ -117,6 +128,11 @@ void Material::setNormalTexture(const GLuint & textureID)
 	_normalMap = textureID;
 }
 
+void Material::setGlowMap(const GLuint & textureID)
+{
+	_glowMap = textureID;
+}
+
 //getters
 
 Shader * Material::getShader(){ return _shader; }
@@ -125,6 +141,7 @@ const vec3 & Material::getAmbiant() { return _ambiant; }
 const vec3 & Material::getDiffuse() { return _diffuse; }
 //const GLuint & Material::getDiffuseTexture() { return _diffuseTexture; }
 const vec3 & Material::getSpecular() { return _specular; }
+const vec2 & Material::getTiling() { return _tiling; }
 const float & Material::getShininess() { return _shininess; }
 
 GLuint Material::mainDiffuseTexture() const
@@ -146,6 +163,11 @@ GLuint Material::normalMap() const
 GLuint Material::specularMap() const
 {
 	return GLuint();
+}
+
+GLuint Material::glowMap() const
+{
+	return _glowMap;
 }
 
 

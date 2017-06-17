@@ -29,7 +29,7 @@ LightSystem::~LightSystem()
 void LightSystem::init(Shader * debugLightShader)
 {
 	_debugLightShader = debugLightShader;
-	_drawDebugLight = false;
+	_drawDebugLight = true;
 }
 
 void LightSystem::update(const Camera& camera)

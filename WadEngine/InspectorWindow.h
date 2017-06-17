@@ -40,6 +40,7 @@ private:
 	void drawMaterial(Material* material);
 	void diffuseProp(Material *material);
 	void normalProp(Material *material);
+	void glowProp(Material *material);
 
 
 };

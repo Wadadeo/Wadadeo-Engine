@@ -12,7 +12,9 @@ struct Material {
 	sampler2D	diffuseMap2;
 	sampler2D	specularMap1;
 	sampler2D	normalMap;
+	sampler2D	glowMap;
 	bool		hasNormalMap;
+	vec2		tiling;
 }; 
 
 struct PointLight {
@@ -120,15 +122,27 @@ vec3 CalcDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDir, vec
 }
 
 
+vec4 processBrightness(vec3 fragColor, vec4 glowColor)
+{
+	float tmp = dot(glowColor.rgb, vec3(0.2126, 0.7152, 0.0722));
+	if (tmp >= 0.5)
+		return vec4((glowColor.rgb) * 2 + fragColor, 1.0);
+	// check whether fragment output is higher than threshold, if so output as brightness color
+    float brightness = dot(fragColor, vec3(0.2126, 0.7152, 0.0722));
+    if (brightness >= 1.0)
+       return vec4(fragColor, 1.0);
+	else
+		return vec4(0, 0, 0, 1.0);
+}
 
 void main() {
 	
 	// Get color diffuse & specular maps
-	vec4 mainTexColor = texture(material.diffuseMap1, fs_in.TexCoord);
-	vec4 secTexColor = texture(material.diffuseMap2, fs_in.TexCoord);
+	vec4 mainTexColor = texture(material.diffuseMap1, fs_in.TexCoord * material.tiling);
+	vec4 secTexColor = texture(material.diffuseMap2, fs_in.TexCoord * material.tiling);
 
 	vec3 diffuseColor = mix(mainTexColor, secTexColor, secTexColor.a).rgb * material.diffuse;
-	vec3 specularColor = texture(material.specularMap1, fs_in.TexCoord).rgb * material.specular;
+	vec3 specularColor = texture(material.specularMap1, fs_in.TexCoord * material.tiling).rgb * material.specular;
 
 
 	//TODO : use uniform bool to detect if normal mapping is available
@@ -136,7 +150,7 @@ void main() {
 	vec3 normal = fs_in.fragNormal; // default normal
 	if (material.hasNormalMap) // if enabled, get normal from normal map
 	{ 
-		normal = texture(material.normalMap, fs_in.TexCoord).rgb;
+		normal = texture(material.normalMap, fs_in.TexCoord * material.tiling).rgb;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = normalize(fs_in.TBN * normal); // transform normal from tangent space to world space
 	}
@@ -167,11 +181,7 @@ void main() {
 		result += CalcSpotLight(spotLights[i], normal, viewDir, diffuseColor, specularColor);
 
 	color = vec4(result, 1.0);
-
-    // check whether fragment output is higher than threshold, if so output as brightness color
-    float brightness = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
-    if (brightness >= 1.0)
-        BrightColor = vec4(color.rgb, 1.0);
-	else
-		BrightColor = vec4(0,0,0,1.0);
+	vec4 glowColor = texture(material.glowMap, fs_in.TexCoord * material.tiling);
+	BrightColor = processBrightness(color.rgb, glowColor);
+	color += glowColor;
 }

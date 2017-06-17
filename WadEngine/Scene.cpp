@@ -15,40 +15,49 @@ const vector<TransformComponent*>& Scene::hierarchy()
 
 void Scene::load()
 {
-	GameObject *l1 = new GameObject("Light 1");
-	l1->transform->Translate(glm::vec3(5, 10, 3));
-	l1->addComponent<LightComponent>()->setType(DIRECTIONAL_LIGHT);
+	//Tron character
+	Model* tronModel = _assets->addModel(MESH_FOLDER("Light Cycle/HQ_Movie cycle.obj"));
+	GameObject* tron = new GameObject(tronModel);
+	tron->transform->Rotate({ -90, 0, 0 });
+	_hierarchy.push_back(tron->transform);
 
-	Material* test = _assets->addMaterial("textureTest");
-	test->setMainTexture(_assets->addTexture("brick", TEXTURE_FOLDER("154.jpg")));
-	test->setNormalTexture(_assets->addTexture("brick_norm", TEXTURE_FOLDER("154_norm.jpg")));
+	//floor
+	Material* wadMat = _assets->addMaterial("WadTexture");
+	wadMat->setMainTexture(_assets->addTexture("wad", TEXTURE_FOLDER("wad_diffuse.png")));
+	wadMat->setGlowMap(_assets->addTexture("wad_glow", TEXTURE_FOLDER("wad_glow.jpg"))->id);
+	wadMat->setSpecular({0.4, 0.4, 0.4});
 
-	Material* test2 = _assets->addMaterial("textureTest2");
-	test2->setMainTexture(_assets->addTexture("brick_2", TEXTURE_FOLDER("brickwall.jpg")));
-	test2->setNormalTexture(_assets->addTexture("brick_norm_2", TEXTURE_FOLDER("brickwall_normal.jpg")));
-
-
-	Material* test3 = _assets->addMaterial("WadTexture");
-	test3->setMainTexture(_assets->addTexture("wad", TEXTURE_FOLDER("wad_text.png")));
-
-	/*Model* ogreModel = _assets->addModel("Assets/Meshes/chelou/bs_ears.obj");
-
-	Material* ogreMaterial = _assets->addMaterial("ogre");
-	ogreMaterial->setMainTexture(_assets->addTexture("diffuseOgre", "Assets/Meshes/chelou/ogre_diffuse.png"));
-	ogreMaterial->setNormalTexture(_assets->addTexture("normalOgre", "Assets/Meshes/chelou/ogre_normalmap.png"));
-
-	GameObject *ogreHead = new GameObject(ogreModel);
-	GameObject *child = ogreHead->transform->getChilds()[0]->gameObject;
-	child->getComponent<RendererComponent>()->setMaterial(ogreMaterial);*/
-
-	/*GameObject *floor = new GameObject("Floor");
+	GameObject *floor = new GameObject("floor");
 	floor->addComponent<MeshComponent>()->mesh(QUAD);
-	floor->addComponent<RendererComponent>()->setMaterial(_assets->defaultMaterial());*/
-	//floor->transform->Scale(vec3(3, 3, 3));
+	floor->addComponent<RendererComponent>()->setMaterial(wadMat);
+	_hierarchy.push_back(floor->transform);
 
-	//_hierarchy.push_back(ogreHead);
+	//lights
+	GameObject *l1 = new GameObject("green Light");
+	l1->transform->Translate({ 0, 1, 3 });
+	LightComponent* lightCpt = l1->addComponent<LightComponent>();
+	lightCpt->setType(POINT_LIGHT);
+	lightCpt->setColor({ 0, 1, 0 });
+	lightCpt->setIntensity(5);
 	_hierarchy.push_back(l1->transform);
-	//_hierarchy.push_back(ogreHead->transform);
+
+	GameObject *l2 = new GameObject("blue Light");
+	l2->transform->Translate({ -1, 2, -3 });
+	lightCpt = l2->addComponent<LightComponent>();
+	lightCpt->setType(POINT_LIGHT);
+	lightCpt->setColor({ 0.05, 0.2, 1});
+	lightCpt->setIntensity(7);
+	_hierarchy.push_back(l2->transform);
+
+	GameObject *l3 = new GameObject("white Light");
+	l3->transform->Translate({ 4, 1, 1 });
+	lightCpt = l3->addComponent<LightComponent>();
+	lightCpt->setType(POINT_LIGHT);
+	lightCpt->setColor({ 1, 1, 1 });
+	lightCpt->setIntensity(4);
+	_hierarchy.push_back(l3->transform);
+
+
 }
 
 void Scene::addGameobjectOfModel(Model * model)

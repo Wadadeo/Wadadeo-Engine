@@ -16,9 +16,10 @@ using namespace glm;
 #define MAX_SPECULAR_TEX 1
 
 
-#define ATTRIB_DIFFUSE "material.diffuseMap"
+#define ATTRIB_DIFFUSE	"material.diffuseMap"
 #define ATTRIB_SPECULAR "material.specularMap"
-#define ATTRIB_NORMAL "material.normalMap"
+#define ATTRIB_NORMAL	"material.normalMap"
+#define ATTRIB_GLOW		"material.glowMap"
 #define ATTRIB_HAS_NORMAL "material.hasNormalMap"
 
 class Material
@@ -31,11 +32,13 @@ private:
 	vector<GLuint> diffuseTextures;
 	vector<GLuint> specularTextures;
 	GLuint			_normalMap;
+	GLuint			_glowMap;
 
 	vec3		_ambiant;
 	vec3		_diffuse;
 	vec3		_specular;
 	float		_shininess;
+	vec2		_tiling;
 
 public:
 	Material(const std::string& name, Shader *shader);
@@ -50,6 +53,7 @@ public:
 	void setDiffuse(const vec3 &color);
 	void setSpecular(const vec3 &color);
 	void setShinisess(const float &value);
+	void setTiling(const vec2 &tiling);
 
 	void setDiffuseTextures(const vector<Texture*> &diffuseMap);
 	void setSpecularTextures(const vector<Texture*> &specularMap);
@@ -62,6 +66,7 @@ public:
 	void setSecondaryTexture(const Texture* texture);
 	void setNormalTexture(const Texture* texture);
 	void setNormalTexture(const GLuint& textureID);
+	void setGlowMap(const GLuint& textureID);
 
 	//getters
 	Shader* getShader();
@@ -69,10 +74,12 @@ public:
 	const vec3& getAmbiant();
 	const vec3& getDiffuse();
 	const vec3& getSpecular();
+	const vec2& getTiling();
 	const float& getShininess();
 	GLuint mainDiffuseTexture() const;
 	GLuint secDiffuseTexture() const;
 	GLuint normalMap() const;
 	GLuint specularMap() const;
+	GLuint glowMap() const;
 };
 

@@ -48,6 +48,7 @@ public:
 	void uniform(const char *name, const glm::mat4 &value) const;
 	void uniform(const char *name, const glm::mat3 &value) const;
 	void uniform(const char *name, const glm::vec3 &value) const;
+	void uniform(const char *name, const glm::vec2 &value) const;
 	void uniform(const char *name, const unsigned int &value) const;
 	void uniform(const char *name, const float &value) const;
 	void uniform(const char *name, bool value) const;

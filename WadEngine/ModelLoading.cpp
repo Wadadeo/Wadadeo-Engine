@@ -42,10 +42,36 @@ Model * ModelLoader::loadModel(const string & path)
 
 Model * ModelLoader::processNode(aiNode * node, const aiScene * scene)
 {
-	Model* model = new Model();
+	Model* modelRoot;
+
+	if (node->mNumMeshes == 0)
+	{
+		modelRoot = new Model();
+		modelRoot->name = "gameobject (" + to_string(++unamedObjectIndex) + ")";
+	}
 
 	//process the mesh of the node (if existing)
-	if (node->mNumMeshes == 0)
+	for (int i = 0; i < node->mNumMeshes; i++)
+	{
+		Model* model = new Model();
+		if (i == 0)
+			modelRoot = model;
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		model->name = mesh->mName.C_Str();
+		if (nameUsed(mesh->mName.C_Str()))
+			model->name += string(" (" + to_string(++unamedObjectIndex) + ")");
+		_nameUsed.push_back(model->name);
+		model->mesh = processMesh(mesh, scene);
+		if (i != 0)
+			modelRoot->childs.push_back(model);
+	}
+
+	for (GLuint i = 0; i < node->mNumChildren; i++)
+		modelRoot->childs.push_back(processNode(node->mChildren[i], scene));
+
+	return modelRoot;
+
+	/*if (node->mNumMeshes == 0)
 		model->name = "gameobject (" + to_string(++unamedObjectIndex) + ")";
 	if (node->mNumMeshes > 0) {
 
@@ -56,13 +82,16 @@ Model * ModelLoader::processNode(aiNode * node, const aiScene * scene)
 		_nameUsed.push_back(model->name);
 		model->mesh = processMesh(mesh, scene);
 	}
-	if (node->mNumMeshes > 1) //should never happen
+	if (node->mNumMeshes > 1)
+	{
+
+	}
 		cerr << "[WARNING] One or more mesh of the node were not loaded" << endl;
 
 	// process the children of the node
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 		model->childs.push_back(processNode(node->mChildren[i], scene));
-	return model;
+	return model;*/
 }
 
 Mesh * ModelLoader::processMesh(aiMesh * mesh, const aiScene * scene)
@@ -147,6 +176,17 @@ Material * ModelLoader::processMaterial(aiMesh * mesh, const aiScene * scene)
 	vector<Texture*> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, Texture::NORMAL);
 	newMaterial->setNormalTextures(normalMaps);
 	
+	
+	unsigned int count = material->GetTextureCount(aiTextureType_EMISSIVE);
+	if (count > 0)
+	{
+		aiString str;
+		material->GetTexture(aiTextureType_EMISSIVE, 0, &str);
+		Texture* texture = _assets->addTexture(str.C_Str(), directory + str.C_Str());
+		newMaterial->setGlowMap(texture->id);
+	}
+
+
 	return newMaterial;
 }
 

@@ -11,6 +11,7 @@
 
 using namespace std;
 
+#define MESH_FOLDER(path) string("../Assets/Meshes/") + path
 #define TEXTURE_FOLDER(path) string("../Assets/Textures/") + path
 #define SHADER_FOLDER(path) string("../Assets/Shaders/") + path
 
